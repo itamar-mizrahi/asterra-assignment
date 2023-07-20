@@ -1,6 +1,11 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import UsersTable from './components/UsersTable';
+import AddUserForm from './components/AddUserForm';
+import AddUserHobbiesForm from './components/AddUserHobbiesForm';
+
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -50,100 +55,17 @@ const App = () => {
   };
 
   return (
-    <div class="container">
-      <h1>Add New User</h1>
-      <div>
-        <label>First Name: </label>
-        <input
-          type="text"
-          value={newUser.firstName || ''}
-          onChange={(e) => setNewUser({ ...newUser, firstName: e.target.value })}
-        />
-      </div>
-      <div>
-        <label>Last Name: </label>
-        <input
-          type="text"
-          value={newUser.lastName || ''}
-          onChange={(e) => setNewUser({ ...newUser, lastName: e.target.value })}
-        />
-      </div>
-      <div>
-        <label>Address: </label>
-        <input
-          type="text"
-          value={newUser.address || ''}
-          onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
-        />
-      </div>
-      <div>
-        <label>Phone Number: </label>
-        <input
-          type="text"
-          value={newUser.phoneNumber || ''}
-          onChange={(e) => setNewUser({ ...newUser, phoneNumber: e.target.value })}
-        />
-      </div>
-      <button onClick={handleAddUser}>Add User</button>
-
-      <h1>Add User Hobbies</h1>
-      <div>
-        <label>Select User: </label>
-        <select
-          value={newHobby.userId || ''}
-          onChange={(e) => setNewHobby({ ...newHobby, userId: e.target.value })}
-        >
-          <option value="">Select User</option>
-          {Array.isArray(users) ? users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.first_name} {user.last_name}
-            </option>
-          )): null}
-        </select>
-      </div>
-      <div>
-        <label>Hobbies: </label>
-        <input
-          type="text"
-          value={newHobby.hobbies || ''}
-          onChange={(e) => setNewHobby({ ...newHobby, hobbies: e.target.value })}
-        />
-      </div>
-      <button onClick={handleAddHobbies}>Add Hobbies</button>
-
-      <h1>Users & Hobbies</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>Phone Number</th>
-            <th>Hobbies</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(users)
-        ? users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.first_name}</td>
-              <td>{user.last_name}</td>
-              <td>{user.address}</td>
-              <td>{user.phone_number}</td>
-              <td>{user.hobbies || '-'}</td>
-              <td>
-                <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
-              </td>
-            </tr>
-          )): null}
-        </tbody>
-      </table>
+    <div className="container">
+      <AddUserForm newUser={newUser} setNewUser={setNewUser} handleAddUser={handleAddUser} />
+      <AddUserHobbiesForm
+        users={users}
+        newHobby={newHobby}
+        setNewHobby={setNewHobby}
+        handleAddHobbies={handleAddHobbies}
+      />
+      <UsersTable users={users} handleDeleteUser={handleDeleteUser} />
     </div>
   );
 };
 
 export default App;
-
