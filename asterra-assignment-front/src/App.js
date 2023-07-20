@@ -94,11 +94,11 @@ const App = () => {
           onChange={(e) => setNewHobby({ ...newHobby, userId: e.target.value })}
         >
           <option value="">Select User</option>
-          {users.map((user) => (
+          {Array.isArray(users) ? users.map((user) => (
             <option key={user.id} value={user.id}>
               {user.first_name} {user.last_name}
             </option>
-          ))}
+          )): null}
         </select>
       </div>
       <div>
@@ -125,7 +125,8 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {Array.isArray(users)
+        ? users.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.first_name}</td>
@@ -137,7 +138,7 @@ const App = () => {
                 <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
               </td>
             </tr>
-          ))}
+          )): null}
         </tbody>
       </table>
     </div>
