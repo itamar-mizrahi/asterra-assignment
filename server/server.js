@@ -10,15 +10,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-client.connect().then(() => {
-  if (err) {
-    console.error("Database connection failed: " + err.stack);
-    return;
-  }
-
-  console.log("Connected to database.");
-});
-
 client.connect().then(async () => {
   if (err) {
     console.error("Database connection failed: " + err.stack);
