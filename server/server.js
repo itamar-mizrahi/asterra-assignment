@@ -19,16 +19,16 @@ client.connect().then(() => {
   console.log("Connected to database.");
 });
 
-client.connect().then(() => {
+client.connect().then(async () => {
   if (err) {
     console.error("Database connection failed: " + err.stack);
     return;
   }
 
   console.log("Connected to database.");
+  await createSchema();
+  await createTables();
 });
-// createSchema();
-// createTables();
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
