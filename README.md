@@ -38,4 +38,4 @@ Overall, I enjoyed working on this assignment. I learned a lot about the MVC pat
 
 ## Deployment
 
-The application was deployed using Amplify and can be found on the GitHub repo of the project on the README file.
+The application was deployed using Amplify and can be found on the top of this README file.
